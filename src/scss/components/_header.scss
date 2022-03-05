@@ -1,0 +1,157 @@
+@import "../vars";
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 40;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $accent-color;
+    z-index: 2;
+  }
+
+  &__logo {
+    flex: 0 0 60px;
+    position: relative;
+    z-index: 3;
+    & img {
+      max-width: 100%;
+    }
+  }
+
+  &__wrapper {
+    position: relative;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__list {
+    display: flex;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__item {
+    & + & {
+      margin-left: 20px;
+    }
+  }
+
+  &__link {
+    color: $light;
+    text-transform: uppercase;
+    font-size: 18px;
+  }
+
+  &__burger {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  body.lock {
+    overflow: hidden;
+  }
+
+  .header {
+    &__wrapper {
+      height: 50px;
+    }
+
+    &__logo {
+      width: 40px;
+    }
+
+    &__link {
+      font-size: 24px;
+    }
+
+    &__burger {
+      display: block;
+      position: relative;
+      width: 30px;
+      height: 20px;
+      position: relative;
+      z-index: 3;
+
+      &::before,
+      &::after {
+        content: "";
+        background-color: $light;
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        left: 0;
+        transition: all 0.5s ease 0s;
+      }
+
+      & span {
+        position: absolute;
+        background-color: $light;
+        top: 9px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        transition: all 0.5s ease 0s;
+      }
+
+      &::before {
+        top: 0;
+      }
+
+      &::after {
+        bottom: 0;
+      }
+
+      &.active::before {
+        transform: rotate(45deg);
+        top: 9px;
+      }
+      &.active::after {
+        transform: rotate(-45deg);
+        bottom: 9px;
+      }
+
+      &.active span {
+        transform: scale(0);
+      }
+    }
+
+    &__menu {
+      position: fixed;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $dark;
+      padding: 70px 10px 20px 10px;
+      transition: all 0.3s ease 0s;
+      overflow: auto;
+
+      &.active {
+        top: 0;
+      }
+    }
+
+    &__list {
+      display: block;
+    }
+
+    &__item {
+      & + & {
+        margin-left: 0;
+      }
+      margin: 0 0 20px 0;
+    }
+  }
+}
